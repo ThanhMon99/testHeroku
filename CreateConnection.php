@@ -7,9 +7,8 @@ $db = "gwcoursebymon";
 
 $conn = new mysqli($host . ":". $port , $user, $password, $db);
 
-if ($conn->connect_errno) {
-    die("Connection failed: " . $conn->connect_errno);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
-
-echo "done";
+echo "Done";
 ?>

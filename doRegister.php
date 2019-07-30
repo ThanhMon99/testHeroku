@@ -1,23 +1,33 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Processing</title>
-    </head>
-    <body>
-        <?php
-        $name = $_POST["txtName"];
-        $course = $_POST["cbCourse"];
-        $birthday = $_POST["birthday"];
-        if(isset($_POST["check_Male"])) { $gender = "Male"; } 
-        if(isset($_POST["check_Female"])) { $gender = "Female"; } 
-        $fav = $_POST["fav"];
-        ?>
-        <h2>
-            Thank you <?php echo $name ?> for registering <?php echo $course ?> </br>
-            Your birthday: <?php echo $birthday ?></br>
-            Gender: <?php echo $gender ?></br>
-            Favorite: <?php echo $fav ?>
-        </h2>
-        <a href="Register.php">BACK</a>
-    </body>
+<head>
+	<title>Processing</title>
+</head>
+<body>
+	<?php 
+		$name = $_POST["txtName"];
+		$course = $_POST["cbCourse"];	
+		$birthday = $_POST["dob"];
+		$gender = $_POST["gender"];
+		$fav_book =$_POST["book"];
+		$fav_car = $_POST["car"];
+		$fav = $fav_book . "," . $fav_car;
+		include 'CreateConnection.php';
+		$stmt =  $conn->prepare("INSERT INTO RegisterCourse(studentname, course, dob,gender,fav) VALUES (?,?,?,?,?)");
+		$stmt->bind_param("sssss",$name,$course,$birthday,
+						$gender,$fav);
+		$stmt->execute();
+		$conn->close();
+	 ?>
+	 <h2>Thank you <?php echo $name?>  for registering 
+	 		<?php echo $course?>
+	 </h2>
+	 <ul>
+	 	<li><?php echo $birthday?></li>
+	 	<li><?php echo $gender?></li>
+	 	<li><?php echo $fav_book?></li>
+	 	<li><?php echo $fav_car?></li>
+	 </ul>
+	 <a href="Register.php">Back</a>
+</body>
 </html>

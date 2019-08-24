@@ -1,14 +1,16 @@
-<?php
-$host = "db4free.net";
-$port = "3306";
-$user = "thanhmon1999";
-$password = "thanhmon1999";
-$db = "gwcoursebymon";
-
-$conn = new mysqli($host . ":". $port , $user, $password, $db);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-echo "Done";
-?>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>test</title>
+    </head>
+    <body>
+    	<?php
+        	$pdo = new PDO('pgsql:host=localhost;port=5432;dbname=myHeroku', 'postgres', 'thanhmon1999');
+                $pdo->setAttribute(PDO::ATTR_TIMEOUT, 15);
+        	echo "fail!!!!!!";
+                
+                
+		?>
+	</ul>
+    </body>
+</html>
